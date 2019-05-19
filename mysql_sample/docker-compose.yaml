@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8
+    container_name: mysql_host
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sample
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - ./:/tmp
+    ports:
+      - 3306:3306
