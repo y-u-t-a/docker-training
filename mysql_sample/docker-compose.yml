@@ -1,6 +1,11 @@
 version: '3'
 
 services:
+  server:
+    image: centos:latest
+    tty: true
+    networks:
+      - my_network
   db:
     image: mysql:5.7
     command: mysqld --character-set-server=utf8
@@ -13,4 +18,8 @@ services:
       - ./sql:/docker-entrypoint-initdb.d
       - ./:/tmp
     ports:
-      - 3306:3306
+      - 3800:3306
+    networks:
+      - my_network
+networks:
+  my_network:
